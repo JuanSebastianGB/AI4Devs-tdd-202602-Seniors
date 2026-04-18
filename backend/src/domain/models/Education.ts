@@ -1,6 +1,8 @@
 import { PrismaClient } from '@prisma/client';
 
-const prisma = new PrismaClient();
+export function getPrismaClient(): PrismaClient {
+    return new PrismaClient();
+}
 
 export class Education {
     id?: number;
@@ -20,6 +22,7 @@ export class Education {
     }
 
     async save() {
+        const prisma = getPrismaClient();
         const educationData: any = {
             institution: this.institution,
             title: this.title,

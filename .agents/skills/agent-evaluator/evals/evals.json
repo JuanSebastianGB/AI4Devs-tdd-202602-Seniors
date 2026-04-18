@@ -1,0 +1,23 @@
+{
+  "skill_name": "agent-evaluator",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Evaluate the pr-pusher subagent by testing if it can properly create a feature branch, commit changes with conventional commit format, and push to remote",
+      "expected_output": "Should create branch, commit with conventional format (feat/fix/docs/etc), push to origin, create PR",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Evaluate the test-runner agent by checking if it correctly runs the test suite for the project",
+      "expected_output": "Should execute test commands and report results",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Evaluate the review agent by having it review a simple code change",
+      "expected_output": "Should provide code review feedback with suggestions",
+      "files": []
+    }
+  ]
+}

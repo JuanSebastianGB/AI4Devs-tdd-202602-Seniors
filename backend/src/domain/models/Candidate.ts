@@ -3,7 +3,18 @@ import { Education } from './Education';
 import { WorkExperience } from './WorkExperience';
 import { Resume } from './Resume';
 
-const prisma = new PrismaClient();
+let prismaInstance: PrismaClient | null = null;
+
+export function setPrismaClient(client: PrismaClient): void {
+    prismaInstance = client;
+}
+
+export function getPrismaClient(): PrismaClient {
+    if (!prismaInstance) {
+        prismaInstance = new PrismaClient();
+    }
+    return prismaInstance;
+}
 
 export class Candidate {
     id?: number;
@@ -29,6 +40,7 @@ export class Candidate {
     }
 
     async save() {
+        const prisma = getPrismaClient();
         const candidateData: any = {};
 
         // Solo añadir al objeto candidateData los campos que no son undefined
@@ -111,6 +123,7 @@ export class Candidate {
     }
 
     static async findOne(id: number): Promise<Candidate | null> {
+        const prisma = getPrismaClient();
         const data = await prisma.candidate.findUnique({
             where: { id: id }
         });

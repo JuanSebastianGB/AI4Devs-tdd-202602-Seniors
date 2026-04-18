@@ -1,6 +1,8 @@
 import { PrismaClient } from '@prisma/client';
 
-const prisma = new PrismaClient();
+export function getPrismaClient(): PrismaClient {
+    return new PrismaClient();
+}
 
 export class WorkExperience {
     id?: number;
@@ -22,6 +24,7 @@ export class WorkExperience {
     }
 
     async save() {
+        const prisma = getPrismaClient();
         const workExperienceData: any = {
             company: this.company,
             position: this.position,
