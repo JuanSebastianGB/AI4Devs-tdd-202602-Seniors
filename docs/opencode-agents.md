@@ -164,7 +164,113 @@ Output format:
 4. **Hide internal subagents** - Use `hidden: true`
 5. **Test agents** - Validate behavior after creation
 
+## OpenCode Plugins
+
+Plugins extend OpenCode with custom tools, event hooks, and external integrations.
+
+### Directory Structure
+
+Plugins are loaded from:
+- Project: `.opencode/plugins/`
+- Global: `~/.config/opencode/plugins/`
+
+### Plugin Structure
+
+```typescript
+// .opencode/plugins/my-plugin.ts
+import { type Plugin, tool } from "@opencode-ai/plugin"
+
+export const MyPlugin: Plugin = async (ctx) => {
+  return {
+    // Custom tools
+    tool: {
+      mytool: tool({
+        description: "Does something useful",
+        args: {
+          param: tool.schema.string(),
+        },
+        async execute(args, context) {
+          return `Result: ${args.param}`
+        },
+      }),
+    },
+    // Event hooks
+    "tool.execute.before": async (input, output) => {
+      // Intercept tool execution
+    },
+  }
+}
+```
+
+### Events Available
+
+| Category | Events |
+|----------|--------|
+| Command | `command.executed` |
+| File | `file.read`, `file.edit.before`, `file.edited` |
+| Tool | `tool.execute`, `tool.execute.before`, `tool.execute.after` |
+| Session | `session.start`, `experimental.session.compacting` |
+| TUI | `tui.prompt.append`, `tui.toast.show` |
+
+### Configuration
+
+Add to `opencode.json`:
+```json
+{
+  "plugin": ["my-plugin", "@organization/opencode-plugin"]
+}
+```
+
+For local dependencies, create `.opencode/package.json`:
+```json
+{
+  "dependencies": {
+    "shescape": "^2.1.0"
+  }
+}
+```
+
+### Publishing
+
+Name with `opencode-` prefix:
+```json
+{
+  "name": "opencode-my-plugin",
+  "version": "1.0.0"
+}
+```
+
+### Project Plugins
+
+#### TypeScript Linter Plugin
+
+File: `.opencode/plugins/ts-linter.ts`
+
+Provides auto-fix capabilities for TypeScript files:
+
+- **ts-lint**: Run linter on files with optional auto-fix
+- **ts-lint-file**: Lint specific file and report errors
+- **ts-lint-project**: Full project lint with error report
+- **Auto-run**: Runs after file writes/edits to auto-fix errors
+
+Uses TypeScript compiler (tsc) and ESLint for validation and auto-fix.
+
+#### Environment Protection Plugin
+
+File: `.opencode/plugins/env-protection.ts`
+
+Prevents exposing sensitive credentials:
+
+- **Blocked files**: .env, .env.local, .env.production, .env.example, config.ts with secrets
+- **Blocked operations**: Reading .env files, editing sensitive files
+- **Git protection**: Prevents git add on .env files
+- **Git push warning**: Warns if env files might be pushed
+- **Sensitive content detection**: Warns when writing env variables to non-.env files
+
+Monitors for: API_KEY, SECRET, PASSWORD, TOKEN, DATABASE_URL, AWS credentials, JWT_SECRET, etc.
+
 ## Related
 
 - Use the `agent-creator` skill for guided agent creation
+- Use the `opencode-plugin-creator` skill for plugin development
 - See existing examples in `.opencode/agents/`
