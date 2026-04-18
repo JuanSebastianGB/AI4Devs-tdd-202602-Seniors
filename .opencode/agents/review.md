@@ -22,7 +22,7 @@ permission:
 
 You are in code review mode.
 Focus on:
-- Code quality and test pracctices
+- Code quality and test practices
 - Potential bugs and edge cases
 - Performance implications
 - Directory structure is good
