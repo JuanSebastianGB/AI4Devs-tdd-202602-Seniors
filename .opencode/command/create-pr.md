@@ -1,6 +1,6 @@
 ---
 description: Creates PR of the current branch
-agent: build
+agent: pr-pusher
 subtask: true
 ---
 
