@@ -1,0 +1,22 @@
+[
+  {"query": "I need to build a multi-agent system where one agent extracts data from PDFs, another converts it, and a third validates the output. How do I design this with proper orchestration?", "should_trigger": true},
+  {"query": "design a document processing pipeline with multiple specialized agents", "should_trigger": true},
+  {"query": "how do I create an agentic workflow with parallel specialists that report back to an orchestrator", "should_trigger": true},
+  {"query": "build a coding assistant with a coder and reviewer agent that iterate until code passes review", "should_trigger": true},
+  {"query": "our team needs to parallelize support ticket analysis across security, technical, and billing reviewers", "should_trigger": true},
+  {"query": "create a swarm of agents that can coordinate on complex tasks", "should_trigger": true},
+  {"query": "design a hierarchical agent system with primary orchestrator and multiple subagents", "should_trigger": true},
+  {"query": "implement a tool composition pattern where multiple agents work in sequence", "should_trigger": true},
+  {"query": "set up a RAG pipeline with separate agents for retrieval, ranking, and synthesis", "should_trigger": true},
+  {"query": "build a data pipeline that extracts, transforms, validates, and stores using agent coordination", "should_trigger": true},
+  {"query": "write a function that returns the sum of two numbers", "should_trigger": false},
+  {"query": "explain what a pointer is in C", "should_trigger": false},
+  {"query": "how do I center a div in CSS", "should_trigger": false},
+  {"query": "create a simple react component that renders hello world", "should_trigger": false},
+  {"query": "what is the difference between var, let, and const in javascript", "should_trigger": false},
+  {"query": "help me debug this python error: IndexError: list index out of range", "should_trigger": false},
+  {"query": "write a SQL query to select all users from the users table", "should_trigger": false},
+  {"query": "how do I install npm packages", "should_trigger": false},
+  {"query": "what are the best practices for REST API design", "should_trigger": false},
+  {"query": "explain the concept of closures in programming", "should_trigger": false}
+]

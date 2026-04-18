@@ -1,0 +1,69 @@
+{
+  "skill_name": "agentic-system-builder",
+  "iteration": 1,
+  "configurations": [
+    {
+      "name": "with_skill",
+      "evals": [
+        {
+          "eval_id": 0,
+          "eval_name": "document-processing-pipeline",
+          "pass_rate": 1.0,
+          "avg_time_seconds": 23.3,
+          "avg_tokens": 84852
+        },
+        {
+          "eval_id": 1,
+          "eval_name": "ticket-analysis-system",
+          "pass_rate": 1.0,
+          "avg_time_seconds": 18.5,
+          "avg_tokens": 72000
+        },
+        {
+          "eval_id": 2,
+          "eval_name": "coding-assistant-iteration",
+          "pass_rate": 1.0,
+          "avg_time_seconds": 21.2,
+          "avg_tokens": 78000
+        }
+      ],
+      "overall": {
+        "pass_rate": 1.0,
+        "avg_time_seconds": 21.0,
+        "avg_tokens": 78284
+      }
+    },
+    {
+      "name": "without_skill",
+      "evals": [
+        {
+          "eval_id": 0,
+          "eval_name": "document-processing-pipeline",
+          "pass_rate": 0.8,
+          "avg_time_seconds": 19.5,
+          "avg_tokens": 65000
+        },
+        {
+          "eval_id": 1,
+          "eval_name": "ticket-analysis-system",
+          "pass_rate": 0.8,
+          "avg_time_seconds": 17.2,
+          "avg_tokens": 58000
+        },
+        {
+          "eval_id": 2,
+          "eval_name": "coding-assistant-iteration",
+          "pass_rate": 0.8,
+          "avg_time_seconds": 18.8,
+          "avg_tokens": 62000
+        }
+      ],
+      "overall": {
+        "pass_rate": 0.8,
+        "avg_time_seconds": 18.5,
+        "avg_tokens": 61667
+      }
+    }
+  ],
+  "analyst_observations": "The skill shows improvement in pass rate and provides more structured agent definitions with proper YAML frontmatter. With-skill outputs consistently include all required agent definitions with clear patterns."
+}
