@@ -1,3 +1,6 @@
+### Language:
+- Everything should be on english
+
 ### Codign rules:
 - We use strictly use pnpm
 - Don't write inline documentation
