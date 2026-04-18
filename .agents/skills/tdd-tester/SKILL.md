@@ -6,6 +6,14 @@ trigger: |
   The skill triggers when user mentions: test, TDD, unit tests, jest, mocking, validation tests, database tests, test suite, coverage, or similar testing concepts for backend code.
 ---
 
+## TDD Cycle: Red → Green → Refactor
+
+Follow this cycle for each test:
+
+1. **Red**: Write a failing test first (test describes expected behavior)
+2. **Green**: Write minimum code to make test pass
+3. **Refactor**: Improve code without breaking tests
+
 # TDD Tester Skill
 
 This skill helps create unit tests following Test-Driven Development methodology for the backend project.
@@ -35,6 +43,21 @@ Split tests into two distinct families:
 
 ### 3. Create test files
 
+#### AAA Pattern
+Use Arrange → Act → Assert structure:
+```typescript
+describe('validateEmail', () => {
+  it('valid email - passes without error', () => {
+    // Arrange
+    const email = 'test@example.com';
+    // Act
+    const result = validateEmail(email);
+    // Assert
+    expect(result).toBe(true);
+  });
+});
+```
+
 #### For validation tests (`backend/tests/validator.test.ts`):
 - Test each validation function independently
 - Use describe blocks for each validation rule
@@ -47,7 +70,47 @@ Split tests into two distinct families:
 - Test error handling (duplicates, connection errors)
 - Verify service returns expected responses
 
-### 4. Setup Prisma Mock
+### 4. Fake It 'Til You Make It
+
+When stuck, start with hardcoded solution to pass test, then refine:
+```typescript
+// First: make it pass no matter what
+function validateEmail(email: string) {
+  return true; // Hardcoded
+}
+// Later: refine with real logic
+function validateEmail(email: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+```
+
+### 5. Parameterized Tests
+
+Avoid duplication by testing multiple inputs:
+```typescript
+describe.each([
+  ['valid@example.com', true],
+  ['invalid', false],
+  ['', false],
+  ['test@domain.co', true],
+])('validateEmail - %s', (input, expected) => {
+  it(\`returns \${expected}\`, () => {
+    expect(validateEmail(input)).toBe(expected);
+  });
+});
+```
+
+### 6. Edge Cases
+
+Test beyond happy path:
+- Empty strings
+- Null/undefined values
+- Special characters (<>&"'...)
+- Unicode characters (ñ, é, 中文, etc.)
+- Very long strings
+- Whitespace only
+
+### 7. Setup Prisma Mock
 
 Create `backend/tests/__mocks__/prisma.ts`:
 
@@ -82,7 +145,7 @@ export function getPrismaClient(): PrismaClient {
 // In save() method, use getPrismaClient() instead of direct prisma
 ```
 
-### 5. Run tests
+### 8. Run tests
 
 Execute tests with: `pnpm test`
 

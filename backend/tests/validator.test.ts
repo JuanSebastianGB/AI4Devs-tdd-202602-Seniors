@@ -36,36 +36,29 @@ describe('Validator - Validation Layer', () => {
     });
 
     describe('validateEmail', () => {
-        it('valid email - passes without error', () => {
-            expect(() => validateEmail('test@example.com')).not.toThrow();
+        describe.each([
+            ['test@example.com'],
+            ['test@mail.example.com'],
+            ['test+tag@example.com'],
+            ['user.co.uk@example.com'],
+        ])('valid email %s - passes without error', (email) => {
+            it('returns no error', () => {
+                expect(() => validateEmail(email as string)).not.toThrow();
+            });
         });
 
-        it('valid email with subdomain - passes without error', () => {
-            expect(() => validateEmail('test@mail.example.com')).not.toThrow();
-        });
-
-        it('valid email with plus - passes without error', () => {
-            expect(() => validateEmail('test+tag@example.com')).not.toThrow();
-        });
-
-        it('empty email - throws error', () => {
-            expect(() => validateEmail('')).toThrow('Invalid email');
-        });
-
-        it('null email - throws error', () => {
-            expect(() => validateEmail(null as any)).toThrow('Invalid email');
-        });
-
-        it('email without @ - throws error', () => {
-            expect(() => validateEmail('testexample.com')).toThrow('Invalid email');
-        });
-
-        it('email without domain - throws error', () => {
-            expect(() => validateEmail('test@')).toThrow('Invalid email');
-        });
-
-        it('email without TLD - throws error', () => {
-            expect(() => validateEmail('test@example')).toThrow('Invalid email');
+        describe.each([
+            ['', 'Invalid email'],
+            [null, 'Invalid email'],
+            ['testexample.com', 'Invalid email'],
+            ['test@', 'Invalid email'],
+            ['test@example', 'Invalid email'],
+            ['@example.com', 'Invalid email'],
+            ['test@.com', 'Invalid email'],
+        ])('invalid email %s - throws error', (email, expectedError) => {
+            it('throws error', () => {
+                expect(() => validateEmail(email as string)).toThrow(expectedError);
+            });
         });
     });
 
@@ -90,16 +83,15 @@ describe('Validator - Validation Layer', () => {
             expect(() => validatePhone(null as any)).not.toThrow();
         });
 
-        it('phone too short - throws error', () => {
-            expect(() => validatePhone('61234567')).toThrow('Invalid phone');
-        });
-
-        it('phone with letter - throws error', () => {
-            expect(() => validatePhone('61234567a')).toThrow('Invalid phone');
-        });
-
-        it('phone with wrong prefix - throws error', () => {
-            expect(() => validatePhone('512345678')).toThrow('Invalid phone');
+        describe.each([
+            ['61234567', 'too short'],
+            ['61234567a', 'with letter'],
+            ['512345678', 'wrong prefix'],
+            ['1234567890', '10 digits'],
+        ])('invalid phone %s - throws error', (phone) => {
+            it('throws error', () => {
+                expect(() => validatePhone(phone as string)).toThrow('Invalid phone');
+            });
         });
     });
 
