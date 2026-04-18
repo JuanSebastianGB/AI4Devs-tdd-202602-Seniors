@@ -1,0 +1,12 @@
+{
+  "eval_id": 2,
+  "eval_name": "coding-assistant-iteration",
+  "prompt": "Build me a coding assistant system where one agent writes code, another reviews it, and they iterate until the code passes review. Include state management to track iteration count and quality scores.",
+  "assertions": [
+    {"text": "Defines coder agent with YAML frontmatter", "passed": false, "evidence": ""},
+    {"text": "Defines reviewer agent with YAML frontmatter", "passed": false, "evidence": ""},
+    {"text": "Describes iterative loop pattern with pass/fail", "passed": false, "evidence": ""},
+    {"text": "Implements state management for iteration tracking", "passed": false, "evidence": ""},
+    {"text": "Includes quality thresholds", "passed": false, "evidence": ""}
+  ]
+}

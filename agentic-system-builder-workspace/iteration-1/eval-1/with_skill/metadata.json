@@ -1,0 +1,13 @@
+{
+  "eval_id": 1,
+  "eval_name": "ticket-analysis-system",
+  "prompt": "Our team needs to analyze incoming customer support tickets - some need security review, others need technical investigation, and some are billing issues. I want an agent system that can parallelize these reviews and aggregate the results into a single priority report.",
+  "assertions": [
+    {"text": "Defines orchestrator agent with YAML frontmatter", "passed": false, "evidence": ""},
+    {"text": "Defines security specialist agent", "passed": false, "evidence": ""},
+    {"text": "Defines technical specialist agent", "passed": false, "evidence": ""},
+    {"text": "Defines billing specialist agent", "passed": false, "evidence": ""},
+    {"text": "Describes fan-out/fan-in parallel pattern", "passed": false, "evidence": ""},
+    {"text": "Includes result aggregation logic", "passed": false, "evidence": ""}
+  ]
+}

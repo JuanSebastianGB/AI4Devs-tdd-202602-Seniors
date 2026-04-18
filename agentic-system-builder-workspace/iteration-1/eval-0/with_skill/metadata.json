@@ -1,0 +1,12 @@
+{
+  "eval_id": 0,
+  "eval_name": "document-processing-pipeline",
+  "prompt": "I need to build a document processing pipeline that extracts text from PDFs, converts them to markdown, and then validates the output for quality. How should I design this as a multi-agent system with separate specialist agents for each step?",
+  "assertions": [
+    {"text": "Defines orchestrator agent with YAML frontmatter", "passed": false, "evidence": ""},
+    {"text": "Defines extractor specialist agent", "passed": false, "evidence": ""},
+    {"text": "Defines converter specialist agent", "passed": false, "evidence": ""},
+    {"text": "Defines validator specialist agent", "passed": false, "evidence": ""},
+    {"text": "Describes sequential pipeline communication pattern", "passed": false, "evidence": ""}
+  ]
+}

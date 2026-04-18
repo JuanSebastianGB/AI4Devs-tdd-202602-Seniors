@@ -1,0 +1,6 @@
+{
+  "eval_id": 2,
+  "eval_name": "coding-assistant-iteration",
+  "prompt": "Build me a coding assistant system where one agent writes code, another reviews it, and they iterate until the code passes review. Include state management to track iteration count and quality scores.",
+  "assertions": []
+}

@@ -1,0 +1,23 @@
+{
+  "skill_name": "agentic-system-builder",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I need to build a document processing pipeline that extracts text from PDFs, converts them to markdown, and then validates the output for quality. How should I design this as a multi-agent system with separate specialist agents for each step?",
+      "expected_output": "A design for a sequential pipeline with 3-4 agents (extractor, converter, validator, orchestrator) with defined roles and communication patterns",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Our team needs to analyze incoming customer support tickets - some need security review, others need technical investigation, and some are billing issues. I want an agent system that can parallelize these reviews and aggregate the results into a single priority report.",
+      "expected_output": "A fan-out/fan-in architecture with routing logic, parallel specialist agents (security, technical, billing), and an aggregator",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Build me a coding assistant system where one agent writes code, another reviews it, and they iterate until the code passes review. Include state management to track iteration count and quality scores.",
+      "expected_output": "An iterative refinement pattern with two agents (coder, reviewer), loop logic, state tracking, and quality thresholds",
+      "files": []
+    }
+  ]
+}
