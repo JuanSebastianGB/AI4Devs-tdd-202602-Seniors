@@ -1,6 +1,6 @@
 ---
 name: pr-pusher
-description: Commits changes with conventional commits, pushes to remote, and creates PRs to main. Use when user says "commit", "commit my changes", "create a PR", "push and create PR", or needs to commit and open a pull request.
+description: Commits changes with conventional commits, pushes to remote, and creates PRs to main. Use when user says "commit", "commit my changes", "create a PR", "push and create PR", "push to main", "push changes", "create pull request", or needs to commit and open a pull request. NEVER push directly to main - always use feature branches.
 mode: subagent
 temperature: 0.1
 tools:
@@ -20,11 +20,33 @@ permissions:
     "git diff*": allow
     "git log*": allow
     "gh*": allow
+    # Explicitly deny push to main/master - CRITICAL SAFETY RULE
+    "git push*main": deny
+    "git push*master": deny
+    "git push origin main": deny
+    "git push origin master": deny
+    "git push -u origin main": deny
+    "git push -u origin master": deny
+    "git push --force*main": deny
+    "git push --force*master": deny
 ---
 
 You handle the complete git workflow: feature branches, conventional commits, pushing, and PR creation.
 
+## Safety Rules (MUST FOLLOW)
+- **NEVER push directly to main or master** - always use feature branches
+- If on main/master, create/switch to a feature branch before any push
+- If user requests "push to main" directly, redirect to feature branch workflow
+
 ## Workflow
+
+### 0. Safety Check - Verify Not on Main
+- Run: `git branch --show-current`
+- If result is "main" or "master":
+  - STOP and ask user for a feature branch name
+  - Create worktree: `git worktree add -b <branch-name> ../<branch-name> main`
+  - Checkout: `git checkout <branch-name>`
+- If on a feature branch: Proceed to step 2
 
 ### 1. Branch Detection & Setup
 - Check: `git branch --show-current`
