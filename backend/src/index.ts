@@ -53,12 +53,21 @@ app.get('/', (req, res) => {
   res.send('Hola LTI!');
 });
 
-app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+export const serverErrorHandler = (err: any, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack);
-  res.type('text/plain'); 
+  res.type('text/plain');
   res.status(500).send('Something broke!');
-});
+};
 
-app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
-});
+app.use(serverErrorHandler);
+
+export function startHttpServer() {
+  app.listen(port, () => {
+    console.log(`Server is running at http://localhost:${port}`);
+  });
+}
+
+/* istanbul ignore if -- started manually in tests; auto-start only outside Jest */
+if (process.env.NODE_ENV !== 'test') {
+  startHttpServer();
+}
