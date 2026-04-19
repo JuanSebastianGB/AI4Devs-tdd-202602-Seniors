@@ -1,0 +1,94 @@
+{
+  "skill_name": "test-driven-development",
+  "evals": [
+    {
+      "id": 1,
+      "eval_name": "eval-retry-exponential-backoff",
+      "prompt": "We are in a Node/TypeScript service. My PM pasted this in Slack: \"customers see random failures when calling Stripe; can we retry idempotent GETs up to 3 times with exponential backoff (base 100ms, cap 2s)?\" Add BOTH the implementation and tests in the repo (e.g. `src/http/retry.ts` plus a colocated `retry.test.ts` or equivalent under your Jest roots). Delivering only the test file without the module under test is an incomplete handoff. Use Jest. I do not care about fancy options objects yet—ship the smallest thing that meets the spec.",
+      "expected_output": "RED: failing test for retry semantics; run tests and capture failing output; GREEN: minimal implementation; run tests green; optional REFACTOR. No production code before a seen failure.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "test_before_impl_order",
+          "description": "Evidence that an automated test existed and failed before the final production implementation was accepted (e.g. transcript order or saved failing run output)."
+        },
+        {
+          "name": "failure_is_meaningful",
+          "description": "Initial failure is due to missing/wrong behavior, not syntax/import mistakes in the test (unless explicitly testing those)."
+        },
+        {
+          "name": "minimal_green_scope",
+          "description": "Implementation satisfies at most the stated retry/backoff spec without unrelated features (e.g. no generic retry framework unless required by tests)."
+        },
+        {
+          "name": "tests_rerun_after_green",
+          "description": "Test command is run again after implementation; suite passes for the new behavior."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "eval_name": "eval-login-empty-password",
+      "prompt": "QA filed: login accepts blank password and still posts to `/api/login`. Fix it in whatever module validates the login form (React or similar). I did not say TDD—just fix it before demo at 5. Use whatever test runner the project already uses.",
+      "expected_output": "Failing test reproducing blank password accepted; then minimal validation fix; regression locked by test.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "regression_test_exists",
+          "description": "A test fails before the fix and passes after, specifically for empty/whitespace password."
+        },
+        {
+          "name": "no_fix_without_failing_test",
+          "description": "No production-only fix without an automated test proving the bug (skill should drive TDD even when user omits the acronym)."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "eval_name": "eval-shipping-threshold",
+      "prompt": "Add shipping calculation: orders subtotal strictly over USD 100 ship free; otherwise flat USD 9.99. Use test-driven development explicitly. Put logic in something like `calculateShipping(subtotal: number)` plus tests.",
+      "expected_output": "Strict RED-GREEN-REFACTOR with boundary at 100.00 vs 100.01 if spec implies strict inequality—tests should clarify.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "boundary_cases_in_tests",
+          "description": "Tests include boundary values around 100 (e.g. 100, 100.01 or equivalent per interpretation) and zero subtotal."
+        },
+        {
+          "name": "tdd_cycle_observable",
+          "description": "Failing then passing test run for the same test file is evidenced (e.g. snippets in commit/PR, transcript, or CI log)."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "eval_name": "eval-legacy-characterization",
+      "prompt": "There is legacy `invoiceTotal(lines)` nobody understands. Before changing tax rounding, add characterization tests that lock current outputs for 2–3 sample inputs (no behavior change yet). Do not refactor production code in this task.",
+      "expected_output": "Tests added first against existing code; all green; no production change—skill scope includes characterization before edits.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "tests_lock_current_behavior",
+          "description": "New tests pass against unchanged production and document concrete examples."
+        },
+        {
+          "name": "no_unplanned_prod_edit",
+          "description": "Production code for invoice math is not rewritten in this step."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "eval_name": "eval-spike-asks-human",
+      "prompt": "Throwaway spike: paste the gnarliest quicksort you can in a scratch file to compare perf vs built-in sort. We will delete it tomorrow. Do not spend time on tests.",
+      "expected_output": "Skill exceptions say confirm with user for throwaway spikes; agent should ask or refuse silent skip of TDD with justification.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "human_confirmation_or_explicit_exception",
+          "description": "Agent explicitly treats this as exception and asks user, or explains TDD exception path—does not silently skip all testing discipline without acknowledgment."
+        }
+      ]
+    }
+  ]
+}

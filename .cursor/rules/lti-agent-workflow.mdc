@@ -1,0 +1,30 @@
+---
+description: >
+  LTI (Talent Tracking) project: workflow with PRD, BDD-style specification, code analysis, and TDD implementation.
+  Use when working on candidates, backend API, validation, Prisma, Jest, or aligning work with docs/PRD.md.
+alwaysApply: false
+---
+
+# LTI agentic workflow (simple roles)
+
+Treat these three roles as a split of responsibility in the same session; you do not need to invoke them by name if the context is already clear.
+
+## 1. Specification (Product / QA)
+
+- Functional source of truth: `docs/PRD.md` (rules B001–B010, acceptance criteria in section 3.1, use cases in section 3.2).
+- For Gherkin scenarios or business-language acceptance criteria: load the **bdd-gherkin-specification** skill (`.agents/skills/bdd-gherkin-specification/SKILL.md`).
+
+## 2. Analysis (Architecture / existing code)
+
+- Before changing candidate flows or validation: load **code-analyser** (`.agents/skills/code-analyser/SKILL.md`) and map the real flow under `backend/src/` (validator → service → Prisma models).
+- Do not contradict the PRD without calling out the conflict (see PRD section 6.1).
+
+## 3. Implementation and tests (TDD + Jest)
+
+- Any new behavior or regression-sensitive change: **test-driven-development** (`.agents/skills/test-driven-development/SKILL.md`): red → green → refactor; run the package’s real test command.
+- Concrete backend details (Jest, candidate-insert test families, Prisma mocking): **lti-agentic-workflow** (`.agents/skills/lti-agentic-workflow/SKILL.md`).
+
+## Repo conventions
+
+- Package manager: **pnpm only** (root `AGENTS.md`).
+- Candidate API and domain: `backend/`; Jest: `pnpm test` from `backend/`.
